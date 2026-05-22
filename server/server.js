@@ -6,7 +6,7 @@ require("dotenv").config();
 const sequelize = require("./config/db");
 
 // Models (IMPORTANT: ensures relationships run)
-require("./models");
+require("./models/Task");
 
 // Routes
 const authRoutes = require("./routes/authRoutes");
