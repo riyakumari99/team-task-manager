@@ -1,20 +1,14 @@
-const { DataTypes } = require("sequelize");
-const sequelize = require("../config/db");
+module.exports = (sequelize, DataTypes) => {
+  const Project = sequelize.define("Project", {
+    name: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
 
-const Project = sequelize.define("Project", {
-  title: {
-    type: DataTypes.STRING,
-    allowNull: false,
-  },
+    description: {
+      type: DataTypes.STRING,
+    },
+  });
 
-  description: {
-    type: DataTypes.TEXT,
-  },
-
-  userId: {   // ✅ IMPORTANT FIX
-    type: DataTypes.INTEGER,
-    allowNull: false,
-  },
-});
-
-module.exports = Project;
+  return Project;
+};

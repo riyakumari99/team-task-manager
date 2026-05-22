@@ -12,13 +12,23 @@ const Task = sequelize.define("Task", {
   },
 
   status: {
-    type: DataTypes.ENUM("Pending", "In Progress", "Completed"),
-    defaultValue: "Pending",
+    type: DataTypes.ENUM("pending", "in-progress", "done"),
+    defaultValue: "pending",
   },
 
   projectId: {
     type: DataTypes.INTEGER,
     allowNull: false,
+  },
+
+  assignedTo: {
+    type: DataTypes.INTEGER,
+    allowNull: false,
+  },
+
+  dueDate: {
+    type: DataTypes.DATE,
+    allowNull: true,
   },
 });
 

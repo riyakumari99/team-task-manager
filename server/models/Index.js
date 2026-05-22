@@ -1,36 +1,13 @@
-const sequelize = require("../config/db");
-
-const User = require("./User");
 const Project = require("./Project");
 const Task = require("./Task");
-
-// =====================
-// RELATIONSHIPS
-// =====================
-
-// User → Projects
-User.hasMany(Project, {
-  foreignKey: "userId",
-  onDelete: "CASCADE",
-});
-
-Project.belongsTo(User, {
-  foreignKey: "userId",
-});
+const User = require("./User");
 
 // Project → Tasks
-Project.hasMany(Task, {
-  foreignKey: "projectId",
-  onDelete: "CASCADE",
-});
+Project.hasMany(Task, { foreignKey: "projectId" });
+Task.belongsTo(Project, { foreignKey: "projectId" });
 
-Task.belongsTo(Project, {
-  foreignKey: "projectId",
-});
+// User → Tasks
+User.hasMany(Task, { foreignKey: "assignedTo" });
+Task.belongsTo(User, { foreignKey: "assignedTo" });
 
-module.exports = {
-  sequelize,
-  User,
-  Project,
-  Task,
-};
+module.exports = { Project, Task, User };

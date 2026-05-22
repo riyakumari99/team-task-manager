@@ -1,36 +1,23 @@
 const Project = require("../models/Project");
 
-// Create Project
-exports.createProject = async (req, res) => {
+// CREATE PROJECT
+const createProject = async (req, res) => {
   try {
-    const { title, description } = req.body;
-
-    const project = await Project.create({
-      title,
-      description,
-      userId: req.user.id,
-    });
-
+    const project = await Project.create(req.body);
     res.status(201).json(project);
-  } catch (error) {
-    res.status(500).json({
-      message: "Error creating project",
-      error: error.message,
-    });
+  } catch (err) {
+    res.status(500).json({ message: err.message });
   }
 };
 
-// Get All Projects
-exports.getProjects = async (req, res) => {
+// GET PROJECTS
+const getProjects = async (req, res) => {
   try {
-    const projects = await Project.findAll({
-      where: { userId: req.user.id }, // IMPORTANT
-    });
-     res.status(200).json(projects);
-  } catch (error) {
-    res.status(500).json({
-      message: "Error fetching projects",
-      error: error.message,
-    });
+    const projects = await Project.findAll();
+    res.json(projects);
+  } catch (err) {
+    res.status(500).json({ message: err.message });
   }
 };
+
+module.exports = { createProject, getProjects };

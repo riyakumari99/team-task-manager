@@ -25,6 +25,40 @@ const register = async (req, res) => {
       });
     }
 
+
+    //login
+/*export const login = async (req, res) => {
+  try {
+    const { email, password } = req.body;
+
+    const user = await User.findOne({ email });
+
+    // ✅ IMPORTANT FIX (prevents crash)
+    if (!user) {
+      return res.status(400).json({ message: "User not found" });
+    }
+
+    const isMatch = await bcrypt.compare(password, user.password);
+
+    // ✅ IMPORTANT FIX
+    if (!isMatch) {
+      return res.status(400).json({ message: "Invalid credentials" });
+    }
+
+    res.json({
+      message: "Login successful",
+      user,
+    });
+
+  } catch (err) {
+    console.log("LOGIN ERROR:", err);
+
+    res.status(500).json({
+      message: "Server error"
+    });
+  }
+};  */
+
     // 3. Hash password
     const hashedPassword = await bcrypt.hash(password, 10);
 
